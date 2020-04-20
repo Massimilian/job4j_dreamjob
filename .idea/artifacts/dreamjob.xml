@@ -1,6 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="dreamjob">
-    <output-path>$PROJECT_DIR$/out/artifacts/dreamjob</output-path>
-    <root id="archive" name="dreamjob.war" />
-  </artifact>
-</component>
