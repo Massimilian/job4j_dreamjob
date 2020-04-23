@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.model.Store" %>
-<%@ page import="ru.job4j.model.Post" %>
+<%@ page import="ru.job4j.model.Candidate" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,16 +21,30 @@
     <title>Работа мечты</title>
 </head>
 <body>
-<div class="container">
+<div class="container pt-3">
+
     <div class="row">
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/posts.jsp">Вакансии</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/candidates.jsp">Кандидаты</a>
-            </li>
-        </ul>
+        <div class="card" style="width: 100%">
+            <div class="card-header">
+                Кандидаты
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Названия</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% for (Candidate can : Store.instOf().findAllCandidates()) { %>
+                    <tr>
+                        <td><%= can.getName() %></td>
+                    </tr>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 </body>
