@@ -28,9 +28,27 @@
                 <a class="nav-link" href="<%=request.getContextPath()%>/posts.jsp">Вакансии</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/candidate.jsp">Кандидаты</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/candidates.jsp">Кандидаты</a>
             </li>
         </ul>
+    </div>
+    <div class="row">
+        <div class="card" style="width: 100%">
+            <div class="card-header">
+                Сегоднящние вакансии.
+            </div>
+            <div class="card-body">
+            </div>
+        </div>
+    </div>
+    <div class="row pt-3">
+        <div class="card" style="width: 100%">
+            <div class="card-header">
+                Сегоднящние кандидаты.
+            </div>
+            <div class="card-body">
+            </div>
+        </div>
     </div>
 </div>
 </body>
