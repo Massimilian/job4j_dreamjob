@@ -39,7 +39,7 @@
                 <% } %>
             </div>
             <div class="card-body">
-                <form action="<%=request.getContextPath()%>/post/save?id=<%=post.getId()%>" method="post">
+                <form action="<%=request.getContextPath()%>/post/save.do?id=<%=post.getId()%>" method="post">
                     <div class="form-group">
                         <label>Название</label>
                         <input type="text" class="form-control" name="vacancy" value="<%=post.getName()%>">
