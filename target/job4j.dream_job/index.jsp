@@ -28,7 +28,7 @@
                 <a class="nav-link" href="<%=request.getContextPath()%>/post/save.do">Вакансии</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/candidate.jsp">Кандидаты</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/candidate/save.do">Кандидаты</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>

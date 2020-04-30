@@ -27,7 +27,7 @@
 
     <servlet-mapping>
         <servlet-name>CandidateServlet</servlet-name>
-        <url-pattern>/candidate/save</url-pattern>
+        <url-pattern>/candidate/save.do</url-pattern>
     </servlet-mapping>
 
     <servlet>

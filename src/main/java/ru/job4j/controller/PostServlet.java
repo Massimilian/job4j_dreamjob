@@ -14,7 +14,6 @@ public class PostServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("posts", Store.instOf().findAllPosts());
-        System.out.println("doGet method");
         req.getRequestDispatcher("posts.jsp").forward(req, resp);
     }
 
