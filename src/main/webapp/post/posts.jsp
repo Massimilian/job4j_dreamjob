@@ -2,8 +2,7 @@
 <%@ page import="ru.job4j.model.Store" %>
 <%@ page import="ru.job4j.model.Post" %>
 <%@ page import="java.util.Collection" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html lang="en">
 <head>
