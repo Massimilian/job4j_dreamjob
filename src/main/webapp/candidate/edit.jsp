@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.model.MemStore" %>
-<%@ page import="ru.job4j.model.Post" %>
 <%@ page import="ru.job4j.model.Candidate" %>
 <!doctype html>
 <html lang="en">

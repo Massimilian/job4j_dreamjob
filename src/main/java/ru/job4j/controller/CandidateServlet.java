@@ -2,6 +2,7 @@ package ru.job4j.controller;
 
 import ru.job4j.model.Candidate;
 import ru.job4j.model.MemStore;
+import ru.job4j.model.PsqlStore;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +14,7 @@ public class CandidateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("candidates", MemStore.instOf().findAllCandidates());
+        req.setAttribute("candidates", PsqlStore.instOf().findAllCandidates());
         req.getRequestDispatcher("candidate.jsp").forward(req, resp);
     }
 
