@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -64,7 +65,19 @@ public class PsqlStore implements Store {
 
     @Override
     public Collection<Candidate> findAllCandidates() {
-        return null;
+        List<Candidate> candidates = new ArrayList<>();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM candidates")
+        ) {
+            try (ResultSet it = ps.executeQuery()) {
+                while (it.next()) {
+                    candidates.add(new Candidate(it.getInt("id"), it.getString("name")));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return candidates;
     }
 
     @Override
@@ -94,7 +107,8 @@ public class PsqlStore implements Store {
 
     private void update(Post post) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement(String.format("UPDATE post SET name='%s' WHEN id= %d", post.getName(), post.getId()))) {
+             PreparedStatement ps = cn.prepareStatement(String.format("UPDATE post SET name='%s' WHEN id= %d", post.getName(), post.getId()))
+             ) {
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
@@ -108,6 +122,25 @@ public class PsqlStore implements Store {
 
     @Override
     public Post findPostById(int id) {
-        return null;
+        Post post = null;
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement(String.format("SELECT * FROM post WHERE id=%d", id))
+        ) {
+            try (ResultSet it = ps.executeQuery()) {
+                while (it.next()) {
+                    post = new Post(it.getInt("id"), it.getString("name"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return post;
     }
+
+
 }
+
+// В какой момент выполняется schema.sql? Можно ли все команды SQL затащить в определённый класс (по типу schema.sql) и дальше просто передавать туда параметры для команд?
+// Где конкретно хранятся те базы данных, которые мы создали (в данном случае - таблицы post и candidates)?
+// Мы создали драйвер и пул, чтобы не открывать новое соединение при каждом запросе. Пул - это хранилище соединений (где каждое отдельное соединение не уничтожается по окончанию, а остаётся активным)? Может ли он переполниться (например, при очень большом количестве запросов от разных пользователей)? Какие задачи поддерживает драйвер?
+// Что происходит с базами данных, когда мы прерываем работу соединения с TomCat (PsqlMain не смог ответить на данный вопрос, так как не нашёл db.properties)?
