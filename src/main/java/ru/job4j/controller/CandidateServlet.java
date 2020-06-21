@@ -1,7 +1,6 @@
 package ru.job4j.controller;
 
 import ru.job4j.model.Candidate;
-import ru.job4j.model.MemStore;
 import ru.job4j.model.PsqlStore;
 
 import javax.servlet.ServletException;
@@ -21,7 +20,7 @@ public class CandidateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        MemStore.instOf().saveCandidate(new Candidate(Integer.valueOf(req.getParameter("id")), req.getParameter("name")));
+        //PsqlStore.instOf().saveCandidate(new Candidate(Integer.valueOf(req.getParameter("id")), req.getParameter("name")));
         resp.sendRedirect(req.getContextPath() + "/candidate/save.do");
     }
 }
