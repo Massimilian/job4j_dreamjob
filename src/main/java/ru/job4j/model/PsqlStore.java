@@ -17,6 +17,7 @@ public class PsqlStore implements Store {
 
     private final BasicDataSource pool = new BasicDataSource();
 
+
     private PsqlStore() {
         Properties cfg = new Properties();
         try (BufferedReader io = new BufferedReader(new FileReader("db.properties"))) {
