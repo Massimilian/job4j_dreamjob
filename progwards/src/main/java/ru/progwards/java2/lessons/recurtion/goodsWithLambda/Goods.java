@@ -66,4 +66,3 @@ public class Goods {
         this.expired = expired;
     }
 }
-

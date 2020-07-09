@@ -9,6 +9,7 @@ public class HanoyTower {
     private final int size;
     private final int start;
     private int indStart;
+    private final boolean needTrace;
     private boolean firstStep = true;
     private boolean secondStep = true;
     private boolean thirdStep = true;
@@ -17,15 +18,16 @@ public class HanoyTower {
         return information;
     }
 
-    public HanoyTower(int size, int pos) {
+    public HanoyTower(int size, int pos, boolean needTrace) {
         this.size = size;
         this.start = pos;
+        this.needTrace = needTrace;
         this.indStart = start;
         tower = new LinkedList[size];
         this.fill(pos);
     }
 
-    private void print() {
+    private void setTrace() {
         StringBuilder sb = new StringBuilder(this.separator);
         for (int i = size - 1; i >= 0; i--) {
             for (int j = 0; j < size; j++) {
@@ -36,7 +38,9 @@ public class HanoyTower {
         sb.append("=================");
         if (!this.information.equals(sb.toString())) {
             this.information = sb.toString();
-            System.out.println(information);
+            if (this.needTrace) {
+                System.out.println(information);
+            }
         }
     }
 
@@ -66,12 +70,11 @@ public class HanoyTower {
     }
 
     private void find(int pos) {
-        this.print();
+        this.setTrace();
         if (tower[(start + 1) % size].size() == size) {
             System.out.println();
             return;
         }
-
         if (tower[pos].isEmpty() && firstStep) { // First step - destroy the tower
             tower[pos].addLast(tower[indStart].pollLast());
             pos = checkingIntoArray(pos);
@@ -82,11 +85,11 @@ public class HanoyTower {
 
         if (secondStep) { // second step - prepare a new place for building
             pos = this.move(pos);
-            this.print();
+            this.setTrace();
             indStart = this.move(indStart);
-            this.print();
+            this.setTrace();
             tower[start].addLast(tower[pos].pollLast());
-            this.print();
+            this.setTrace();
             secondStep = false;
             find(pos);
         }

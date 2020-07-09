@@ -10,29 +10,29 @@ public class HanoyTowerTest {
 
     @Test
     public void WhenTryToBuildHanoyTowerWithTenRingsThenDoIt() {
-        ht = new HanoyTower(10, 9);
+        ht = new HanoyTower(10, 9, false);
         ht.start();
-        String nulls = "  I    I    I    I    I    I    I    I    I  ";
+        String manyI = "  I    I    I    I    I    I    I    I    I  ";
         StringBuilder result = new StringBuilder(separator);
-        result.append(String.format("%s%s", "<001>", nulls));
+        result.append(String.format("%s%s", "<001>", manyI));
         result.append(separator);
-        result.append(String.format("%s%s", "<002>", nulls));
+        result.append(String.format("%s%s", "<002>", manyI));
         result.append(separator);
-        result.append(String.format("%s%s", "<003>", nulls));
+        result.append(String.format("%s%s", "<003>", manyI));
         result.append(separator);
-        result.append(String.format("%s%s", "<004>", nulls));
+        result.append(String.format("%s%s", "<004>", manyI));
         result.append(separator);
-        result.append(String.format("%s%s", "<005>", nulls));
+        result.append(String.format("%s%s", "<005>", manyI));
         result.append(separator);
-        result.append(String.format("%s%s", "<006>", nulls));
+        result.append(String.format("%s%s", "<006>", manyI));
         result.append(separator);
-        result.append(String.format("%s%s", "<007>", nulls));
+        result.append(String.format("%s%s", "<007>", manyI));
         result.append(separator);
-        result.append(String.format("%s%s", "<008>", nulls));
+        result.append(String.format("%s%s", "<008>", manyI));
         result.append(separator);
-        result.append(String.format("%s%s", "<009>", nulls));
+        result.append(String.format("%s%s", "<009>", manyI));
         result.append(separator);
-        result.append(String.format("%s%s", "<010>", nulls));
+        result.append(String.format("%s%s", "<010>", manyI));
         result.append(separator);
         result.append("=================");
         Assert.assertEquals(ht.getInformation(), result.toString());

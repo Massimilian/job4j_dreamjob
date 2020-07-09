@@ -3,6 +3,7 @@ package ru.progwards.java2.lessons.recurtion.asNumbersSum;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class AsNumbersSum {
     public static String asNumbersSum(int number) {
         ArrayList<ArrayList<Integer>> list = new ArrayList<>();
