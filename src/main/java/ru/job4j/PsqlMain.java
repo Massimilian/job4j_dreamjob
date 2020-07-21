@@ -11,7 +11,7 @@ import java.math.RoundingMode;
 
 public class PsqlMain {
     public static void main(String[] args) {
-        PsqlStore store = PsqlStore.instOf();
+        PsqlStore store = (PsqlStore) PsqlStore.instOf();
         store.savePost(new Post( "Java Job new"));
         System.out.println("Posts:");
         for (Post post : store.findAllPosts()) {
@@ -29,6 +29,5 @@ public class PsqlMain {
         Candidate candidate = store.findCandidateById(2);
         System.out.println("Special candidate:");
         System.out.println(candidate.getId() + ". " + candidate.getName());
-        store.finish();
     }
 }
