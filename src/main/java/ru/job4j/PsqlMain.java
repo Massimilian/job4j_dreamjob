@@ -3,16 +3,11 @@ package ru.job4j;
 import ru.job4j.model.Candidate;
 import ru.job4j.model.Post;
 import ru.job4j.model.PsqlStore;
-import ru.job4j.model.Store;
-
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 
 public class PsqlMain {
     public static void main(String[] args) {
         PsqlStore store = (PsqlStore) PsqlStore.instOf();
-        store.savePost(new Post( "Java Job new"));
+        store.createPost(new Post( "Java Job new"));
         System.out.println("Posts:");
         for (Post post : store.findAllPosts()) {
             System.out.println(post.getId() + ". " + post.getName());

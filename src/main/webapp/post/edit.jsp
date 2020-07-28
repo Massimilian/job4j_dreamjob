@@ -24,7 +24,7 @@
 <body>
 <%
     String id = request.getParameter("id");
-    Post post = new Post(0, "");
+    Post post = new Post(-1, "");
     if (id != null) {
         post = TestPsqlStore.instOf().findPostById(Integer.valueOf(id));
     }

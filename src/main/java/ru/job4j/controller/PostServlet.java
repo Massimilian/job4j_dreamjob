@@ -1,7 +1,6 @@
 package ru.job4j.controller;
 
 import ru.job4j.model.Post;
-import ru.job4j.model.PsqlStore;
 import ru.job4j.model.TestPsqlStore;
 
 import javax.servlet.ServletException;
@@ -22,7 +21,12 @@ public class PostServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        TestPsqlStore.instOf().savePost(new Post(Integer.valueOf(req.getParameter("id")), req.getParameter("vacancy")));
+        String id = req.getParameter("id");
+        if (id.equals("-1")) {
+            TestPsqlStore.instOf().createPost(new Post(0, req.getParameter("vacancy")));
+        } else {
+            TestPsqlStore.instOf().update(new Post(Integer.valueOf(id), req.getParameter("vacancy")));
+        }
         //PsqlStore.instOf().savePost(new Post(Integer.valueOf(req.getParameter("id")), req.getParameter("vacancy")));
         resp.sendRedirect(req.getContextPath() + "/post/save.do");
     }

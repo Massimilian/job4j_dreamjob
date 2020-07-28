@@ -70,9 +70,10 @@ public class PsqlStore implements Store{
     }
 
     @Override
-    public void savePost(Post post) {
+    public void createPost(Post post) {
 
     }
+
 
     @Override
     public Post findPostById(int id) {
@@ -87,6 +88,16 @@ public class PsqlStore implements Store{
     @Override
     public Candidate findCandidateById(int id) {
         return null;
+    }
+
+    @Override
+    public void createCandidate(Candidate vacancy) {
+
+    }
+
+    @Override
+    public void update(Candidate vacancy) {
+
     }
 
     public void save(Post post) {
@@ -114,7 +125,7 @@ public class PsqlStore implements Store{
         return post;
     }
 
-    private void update(Post post) {
+    public void update(Post post) {
 
     }
 }

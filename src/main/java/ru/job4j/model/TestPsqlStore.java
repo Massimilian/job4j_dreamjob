@@ -11,6 +11,11 @@ public class TestPsqlStore implements Store {
     Connection connection = null;
 
     public TestPsqlStore() {
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         this.addPosts();
         this.addCandidates();
     }
@@ -117,14 +122,56 @@ public class TestPsqlStore implements Store {
     }
 
     @Override
-    public void savePost(Post post) {
+    public void createPost(Post post) {
         try {
             this.connection = DriverManager.getConnection(url, username, password);
-            PreparedStatement st = connection.prepareStatement("INSERT INTO posts (id, name) values (?, ?)");
-            st.setInt(1, post.getId());
-            st.setString(2, post.getName());
-            ResultSet rs = st.executeQuery();
-            rs.close();
+            PreparedStatement st = connection.prepareStatement("INSERT INTO posts (name) values (?)");
+            st.setString(1, post.getName());
+            st.execute();
+            st.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+    }
+
+    @Override
+    public void createCandidate(Candidate cand) {
+        try {
+            this.connection = DriverManager.getConnection(url, username, password);
+            PreparedStatement st = connection.prepareStatement("INSERT INTO candidates (name) values (?)");
+            st.setString(1, cand.getName());
+            st.execute();
+            st.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+    }
+
+
+    @Override
+    public void update(Post post) {
+        try {
+            this.connection = DriverManager.getConnection(url, username, password);
+            PreparedStatement st = connection.prepareStatement("UPDATE posts SET name = ? WHERE id = ?");
+            st.setString(1, post.getName());
+            st.setInt(2, post.getId());
+            st.execute();
             st.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -141,14 +188,13 @@ public class TestPsqlStore implements Store {
 
 
     @Override
-    public void saveCandidate(Candidate candidate) {
+    public void update(Candidate cand) {
         try {
             this.connection = DriverManager.getConnection(url, username, password);
-            PreparedStatement st = connection.prepareStatement("INSERT INTO candidates (id, name) values (?, ?)");
-            st.setInt(1, candidate.getId());
-            st.setString(2, candidate.getName());
-            ResultSet rs = st.executeQuery();
-            rs.close();
+            PreparedStatement st = connection.prepareStatement("UPDATE candidates SET name = ? WHERE id = ?");
+            st.setString(1, cand.getName());
+            st.setInt(2, cand.getId());
+            st.execute();
             st.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -162,6 +208,29 @@ public class TestPsqlStore implements Store {
             }
         }
     }
+
+    @Override
+    public void saveCandidate(Candidate candidate) {
+        try {
+            this.connection = DriverManager.getConnection(url, username, password);
+            PreparedStatement st = connection.prepareStatement("INSERT INTO candidates (name) values (?)");
+            st.setString(1, candidate.getName());
+            st.execute();
+            st.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+    }
+
+
 
     @Override
     public Post findPostById(int id) {

@@ -7,11 +7,17 @@ public interface Store {
 
     Collection<Candidate> findAllCandidates();
 
-    void savePost(Post post);
+    void createPost(Post post);
+
+    void update(Post post);
 
     Post findPostById(int id);
 
     void saveCandidate(Candidate candidate);
 
     Candidate findCandidateById(int id);
+    
+    void createCandidate(Candidate vacancy);
+
+    void update(Candidate vacancy);
 }

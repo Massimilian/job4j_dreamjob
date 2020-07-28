@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.model.Candidate" %>
 <%@ page import="ru.job4j.model.PsqlStore" %>
+<%@ page import="ru.job4j.model.TestPsqlStore" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -23,9 +24,9 @@
 <body>
 <%
     String id = request.getParameter("id");
-    Candidate can = new Candidate(0, "");
+    Candidate can = new Candidate(-1, "");
     if (id != null) {
-        can = PsqlStore.instOf().findCandidateById(Integer.valueOf(id));
+        can = TestPsqlStore.instOf().findCandidateById(Integer.valueOf(id));
     }
 %>
 <div class="container pt-3">
@@ -48,6 +49,15 @@
                 </form>
             </div>
         </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/index.jsp">К главному меню</a>
+            </li>
+        </ul>
     </div>
 </div>
 </body>
